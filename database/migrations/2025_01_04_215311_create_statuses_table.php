@@ -18,10 +18,9 @@ return new class extends Migration
             $table->string('color', 7); // Cor associada (ex.: "#FF5733")
             $table->unsignedInteger('order')->default(1);
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Associado ao usuário
+            $table->boolean('is_finalized')->default(false); // Define o campo com valor padrão
             $table->timestamps(); // Campos de auditoria
         });
-
-
     }
 
     /**

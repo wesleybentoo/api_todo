@@ -78,4 +78,30 @@ class User extends Authenticatable
         return $this->hasMany(Log::class, 'user_id');
     }
 
+
+    /**
+     * Criar categorias padrão para o usuário.
+     */
+    public function createDefaultCategories()
+    {
+        $this->categories()->createMany([
+            ['name' => 'Trabalho', 'color' => '#FF5733'],
+            ['name' => 'Casa', 'color' => '#33FF57'],
+            ['name' => 'Estudos', 'color' => '#3357FF'],
+        ]);
+    }
+
+    /**
+     * Criar status padrão para o usuário.
+     */
+    public function createDefaultStatuses()
+    {
+        $this->statuses()->createMany([
+            ['name' => 'Em Aguardo', 'description' => 'Aguardando início', 'color' => '#808080', 'order' => 1, 'is_finalized' => false],
+            ['name' => 'Em Progresso', 'description' => 'Em andamento', 'color' => '#0000FF', 'order' => 2, 'is_finalized' => false],
+            ['name' => 'Cancelado', 'description' => 'Cancelado pelo usuário', 'color' => '#FF0000', 'order' => 3, 'is_finalized' => true],
+            ['name' => 'Finalizado', 'description' => 'Concluído com sucesso', 'color' => '#00FF00', 'order' => 4, 'is_finalized' => true],
+        ]);
+    }
+
 }

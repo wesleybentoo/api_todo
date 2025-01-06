@@ -46,6 +46,10 @@ class UserController extends Controller
                 'password' => Hash::make($validated['password']),
             ]);
 
+            // Criar status e categorias padrão
+            $user->createDefaultCategories();
+            $user->createDefaultStatuses();
+
             $token = $user->createToken('API Token')->plainTextToken;
 
             return response()->json([

@@ -14,7 +14,8 @@ class Status extends Model
         'description',
         'color',
         'order',
-        'user_id'
+        'user_id',
+        'is_finalized'
     ];
 
     public function user()

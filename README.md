@@ -3,6 +3,12 @@
 **Autor:** Wesley Bento  
 **Descrição:** Esta documentação cobre todos os endpoints da API ToDo, incluindo criação, leitura, atualização e exclusão de usuários, categorias, status, tarefas e subtarefas.
 
+## Requisitos do Projeto
+
+- PHP 8.2.*
+- Composer 2.x
+- Node.js 16.x
+
 ## **Índice**
 1. [Introdução](#introdução)
 2. [Configuração Inicial](#configuração-inicial)
@@ -223,9 +229,16 @@ A API ToDo foi desenvolvida para gerenciar tarefas organizadas por categorias, s
          "status_id": 2
     }
 
+
 3. **Deletar Subtarefa**    
    **Método:** `DELETE`  
-   **Endpoint:** `/tasks/{task_id}/subtasks/{subtask_id}`   
+   **Endpoint:** `/tasks/{task_id}/subtasks/{subtask_id}`    
+   **Headers:** `Authorization: Bearer {TOKEN}`
+
+
+4. **Deletar Todas Subtarefas**    
+   **Método:** `DELETE`  
+   **Endpoint:** `/tasks/{task_id}/subtasks`   
    **Headers:** `Authorization: Bearer {TOKEN}`
 
    

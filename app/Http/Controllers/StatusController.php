@@ -31,6 +31,11 @@ class StatusController extends Controller
             $query->orderBy($request->sort_by, $sortOrder);
         }
 
+        // Finalizado
+        if ($request->has('is_finalized')) {
+            $query->where('is_finalized', $request->is_finalized);
+        }
+
         // Paginação
         $statuses = $query->paginate(10);
 
@@ -62,6 +67,7 @@ class StatusController extends Controller
                 'color' => 'nullable|string|max:7|regex:/^#[0-9A-Fa-f]{6}$/', // Cor opcional no formato hexadecimal
                 'description' => 'nullable|string|max:1000', // Descrição opcional
                 'order' => 'nullable|integer|min:1|unique:statuses,order,NULL,id,user_id,' . $request->user()->id,
+                'is_finalized' => 'nullable|boolean',
             ], [
                 'name.required' => 'O campo nome é obrigatório.',
                 'name.string' => 'O campo nome deve ser uma string.',
@@ -129,6 +135,7 @@ class StatusController extends Controller
                 'color' => 'nullable|string|max:7|regex:/^#[0-9A-Fa-f]{6}$/', // Cor opcional no formato hexadecimal
                 'description' => 'nullable|string|max:1000', // Descrição opcional
                 'order' => 'nullable|integer|min:1|unique:statuses,order,' . $id . ',id,user_id,' . $request->user()->id,
+                'is_finalized' => 'nullable|boolean',
             ], [
                 'name.required' => 'O campo nome é obrigatório.',
                 'name.string' => 'O campo nome deve ser uma string.',
