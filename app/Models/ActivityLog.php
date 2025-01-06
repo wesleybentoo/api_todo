@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ActivityLog extends Model
 {
@@ -18,6 +19,9 @@ class ActivityLog extends Model
         'user_id',
         'changed_at',
     ];
+
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
 
     /**
      * Relacionamento com Tarefas.

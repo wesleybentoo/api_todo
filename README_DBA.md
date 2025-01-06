@@ -1,8 +1,29 @@
-# **Planejamento do Banco de Dados (Etapa 1 - Desafio)**
+# **Planejamento do Banco de Dados**
 
 **Autor:** Wesley Bento
 
 **Descrição:** Este documento descreve o planejamento do banco de dados para a aplicação **To-Do List**. A seguir, apresentamos o Modelo Entidade-Relacionamento (MER), explicamos as tabelas, relacionamentos e as decisões tomadas para atender às funcionalidades propostas.
+
+---
+
+## **Índice**
+
+1. [Modelo Entidade-Relacionamento (MER)](#1-modelo-entidade-relacionamento-mer)
+    - [Entidades Principais](#entidades-principais)
+2. [Estrutura do Banco de Dados](#2-estrutura-do-banco-de-dados)
+    - [Tabela: users](#tabela-users)
+    - [Tabela: statuses](#tabela-statuses)
+    - [Tabela: tasks](#tabela-tasks)
+    - [Tabela: subtasks](#tabela-subtasks)
+    - [Tabela: categories](#tabela-categories)
+    - [Tabela: activity_logs](#tabela-activity_logs)
+    - [Tabela: logs](#tabela-logs)
+3. [Relacionamentos entre Tabelas](#3-relacionamentos-entre-tabelas)
+4. [Decisões de Design](#4-decisoes-de-design)
+    - [4.1 Escalabilidade](#41-escalabilidade)
+    - [4.2 Manutenção](#42-manutencao)
+    - [4.3 Organização](#43-organizacao)
+5. [Conclusão](#5-conclusao)
 
 ---
 
@@ -26,6 +47,8 @@ O MER foi projetado para garantir que todas as funcionalidades do sistema sejam 
 ### **Tabelas e Atributos**
 Abaixo, detalhamos cada tabela e sua estrutura:
 
+---
+
 ### **Tabela: users**
 Armazena informações dos usuários.
 - `id`: Chave primária (serial).
@@ -33,6 +56,7 @@ Armazena informações dos usuários.
 - `email`: E-mail único.
 - `password`: Hash da senha.
 - `created_at` e `updated_at`: Auditoria de criação e atualização.
+- `deleted_at`: Data de exclusão lógica (SoftDeletes).
 
 ---
 
@@ -44,21 +68,23 @@ Define os estados possíveis de tarefas e subtarefas.
 - `color`: Cor associada ao status (ex.: #FF5733).
 - `order`: Ordem de exibição (não repetível).
 - `user_id`: Relaciona o criador do status.
+- `is_finalized`: Indica se o status é finalizado.
 - `created_at` e `updated_at`: Auditoria de criação e atualização.
+- `deleted_at`: Data de exclusão lógica (SoftDeletes).
 
 ---
 
 ### **Tabela: tasks**
 Representa as tarefas criadas pelos usuários.
 - `id`: Chave primária (serial).
-- `title`: Título da tarefa.
+- `name`: Nome da tarefa.
 - `description`: Descrição da tarefa.
 - `due_date`: Prazo de conclusão (opcional).
-- `completed_at`: Data e hora de conclusão (opcional).
 - `status_id`: Relaciona o status da tarefa.
 - `user_id`: Relaciona o criador da tarefa.
 - `category_id`: Relaciona a categoria da tarefa (opcional).
 - `created_at` e `updated_at`: Auditoria de criação e atualização.
+- `deleted_at`: Data de exclusão lógica (SoftDeletes).
 
 ---
 
@@ -67,11 +93,10 @@ Representa subtarefas associadas a tarefas principais.
 - `id`: Chave primária (serial).
 - `title`: Título da subtarefa.
 - `description`: Descrição detalhada.
-- `due_date`: Prazo de conclusão (opcional).
-- `completed_at`: Data e hora de conclusão (opcional).
 - `status_id`: Relaciona o status da subtarefa.
 - `task_id`: Relaciona a tarefa principal.
 - `created_at` e `updated_at`: Auditoria de criação e atualização.
+- `deleted_at`: Data de exclusão lógica (SoftDeletes).
 
 ---
 
@@ -82,6 +107,7 @@ Permite organizar tarefas em grupos.
 - `color`: Cor associada à categoria (ex.: #FF5733).
 - `user_id`: Relaciona o criador da categoria.
 - `created_at` e `updated_at`: Auditoria de criação e atualização.
+- `deleted_at`: Data de exclusão lógica (SoftDeletes).
 
 ---
 
@@ -96,6 +122,7 @@ Registra alterações realizadas em tarefas e subtarefas.
 - `user_id`: Usuário responsável pela alteração.
 - `changed_at`: Data e hora da alteração.
 - `created_at` e `updated_at`: Auditoria de criação e atualização.
+- `deleted_at`: Data de exclusão lógica (SoftDeletes).
 
 ---
 
@@ -107,6 +134,7 @@ Registra todas as ações realizadas pelos usuários no sistema.
 - `endpoint`: Rota do sistema utilizada (ex.: "/api/tasks").
 - `details`: Detalhes adicionais sobre a ação.
 - `created_at` e `updated_at`: Auditoria de criação e atualização.
+- `deleted_at`: Data de exclusão lógica (SoftDeletes).
 
 ---
 

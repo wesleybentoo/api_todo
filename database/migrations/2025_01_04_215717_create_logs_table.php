@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('details')->nullable(); // Informações adicionais sobre a ação
             $table->timestamp('action_date')->default(DB::raw('CURRENT_TIMESTAMP')); // Data e hora da ação
             $table->timestamps(); // Campos created_at e updated_at
+            $table->softDeletes();
         });
 
     }

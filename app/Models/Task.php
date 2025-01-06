@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Task extends Model
 {
@@ -22,6 +23,10 @@ class Task extends Model
         'category_id',
         'due_date',
     ];
+
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
+
 
     /**
      * Relacionamento: Uma tarefa pertence a um usuário.

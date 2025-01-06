@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Subtask extends Model
 {
@@ -15,6 +16,9 @@ class Subtask extends Model
         'status_id',
         'task_id'
     ];
+
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
 
     public function task()
     {

@@ -14,7 +14,8 @@ class TaskController extends Controller
     public function index(Request $request)
     {
         try {
-            $query = $request->user()->tasks()->with(['subtasks', 'status', 'category']);
+            $query = $request->user()->tasks()->with(['subtasks', 'status', 'category'])
+                ->whereNull('deleted_at');
 
             // Aplicar pesquisa
             if ($request->has('search')) {
@@ -47,7 +48,9 @@ class TaskController extends Controller
     public function listAll(Request $request)
     {
         try {
-            $tasks = $request->user()->tasks()->with(['subtasks', 'status', 'category'])->get();
+            $tasks = $request->user()->tasks()
+                ->with(['subtasks', 'status', 'category'])
+                ->whereNull('deleted_at')->get();
 
             return response()->json([
                 'message' => 'Lista de todas as tarefas.',

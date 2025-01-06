@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('color', 7); // Cor associada (ex.: "#FF5733")
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Associado ao usuário
             $table->timestamps(); // Campos created_at e updated_at
+            $table->softDeletes();
         });
 
     }

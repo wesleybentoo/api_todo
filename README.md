@@ -30,6 +30,55 @@ A API ToDo foi desenvolvida para gerenciar tarefas organizadas por categorias, s
 
 ---
 
+## Configuração Inicial
+
+### Clonar o repositório
+    git clone https://github.com/wesleybentoo/api_todo.git
+    cd <nome-do-repositório>
+
+### Instalar as dependências do Laravel
+    composer install
+
+### Configurar o arquivo .env
+    cp .env.example .env
+
+### Gerar a chave da aplicação
+    php artisan key:generate
+
+### Configurar o banco de dados PostgreSQL
+
+    echo "Configurando o PostgreSQL..."
+    sudo -u postgres psql -c "CREATE DATABASE todo_db;"
+    sudo -u postgres psql -c "CREATE USER todo_user WITH PASSWORD 'sua_senha_forte';"
+    sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE todo_db TO todo_user;"
+
+### Atualize manualmente o arquivo .env com as credenciais abaixo:
+    echo "
+    DB_CONNECTION=pgsql
+    DB_HOST=127.0.0.1
+    DB_PORT=5432
+    DB_DATABASE=todo_db
+    DB_USERNAME=todo_user
+    DB_PASSWORD=sua_senha_forte
+    " >> .env
+
+### Rodar as migrações
+    php artisan migrate
+
+### Instalar dependências do Node.js
+    npm install
+
+### Compilar os assets
+    npm run dev
+
+### Iniciar o servidor de desenvolvimento
+    php artisan serve
+
+### Mensagem final
+    🚀 Aplicação pronta! Acesse: http://127.0.0.1:8000"
+
+---
+
 ## Endpoints
 
 ### **Usuários**

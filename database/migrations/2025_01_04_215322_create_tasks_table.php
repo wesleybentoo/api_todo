@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id')->nullable(); // ID da categoria (relacionamento)
             $table->date('due_date')->nullable(); // Data de vencimento
             $table->timestamps();
+            $table->softDeletes();
 
             // Relacionamentos
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

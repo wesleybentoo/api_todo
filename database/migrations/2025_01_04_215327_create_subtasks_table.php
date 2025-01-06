@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('status_id')->constrained('statuses'); // Chave estrangeira para statuses
             $table->foreignId('task_id')->constrained('tasks'); // Chave estrangeira para a tarefa principal
             $table->timestamps(); // Campos created_at e updated_at
+            $table->softDeletes();
         });
 
     }

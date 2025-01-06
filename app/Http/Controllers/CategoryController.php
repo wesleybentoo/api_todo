@@ -39,11 +39,11 @@ class CategoryController extends Controller
     public function listAll(Request $request)
     {
         // Recuperar todos os status do usuário autenticado
-        $category = $request->user()->statuses;
+        $category = $request->user()->categories;
 
         return response()->json([
             'message' => 'Lista de todas as categorias do usuário.',
-            'statuses' => $category,
+            'categories' => $category,
         ], 200);
     }
 

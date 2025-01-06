@@ -14,7 +14,7 @@ class SubtaskController extends Controller
     public function index(Request $request, $taskId)
     {
         try {
-            $task = $request->user()->tasks()->find($taskId);
+            $task = $request->user()->tasks()->whereNull('deleted_at')->find($taskId);
 
             if (!$task) {
                 return response()->json(['message' => 'Tarefa não encontrada.'], 404);
@@ -48,7 +48,7 @@ class SubtaskController extends Controller
     public function listAll(Request $request, $taskId)
     {
         try {
-            $task = $request->user()->tasks()->find($taskId);
+            $task = $request->user()->tasks()->whereNull('deleted_at')->find($taskId);
 
             if (!$task) {
                 return response()->json(['message' => 'Tarefa não encontrada.'], 404);

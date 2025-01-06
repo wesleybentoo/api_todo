@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Associado ao usuário
             $table->boolean('is_finalized')->default(false); // Define o campo com valor padrão
             $table->timestamps(); // Campos de auditoria
+            $table->softDeletes();
         });
     }
 

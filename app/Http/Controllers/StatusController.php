@@ -13,7 +13,7 @@ class StatusController extends Controller
      */
     public function index(Request $request)
     {
-        $query = $request->user()->statuses();
+        $query = $request->user()->statuses()->whereNull('deleted_at');
 
         // Filtro por nome
         if ($request->has('name') && $request->name) {
@@ -48,7 +48,7 @@ class StatusController extends Controller
     public function listAll(Request $request)
     {
         // Recuperar todos os status do usuário autenticado
-        $statuses = $request->user()->statuses()->orderBy('order', 'asc')->get();
+        $statuses = $request->user()->statuses()->whereNull('deleted_at')->orderBy('order', 'asc')->get();
 
         return response()->json([
             'message' => 'Lista de todos os status do usuário.',

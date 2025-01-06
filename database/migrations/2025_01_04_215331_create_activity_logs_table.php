@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users'); // Usuário que realizou a alteração
             $table->timestamp('changed_at')->default(DB::raw('CURRENT_TIMESTAMP')); // Data/hora da alteração
             $table->timestamps(); // Campos created_at e updated_at
+            $table->softDeletes();
         });
 
     }
