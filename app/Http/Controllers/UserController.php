@@ -101,6 +101,32 @@ class UserController extends Controller
     }
 
     /**
+     * Recuperar os dados do usuário logado.
+     */
+    public function profile(Request $request)
+    {
+        try {
+            // Recupera o usuário autenticado através do token
+            $user = $request->user();
+
+            if (!$user) {
+                return response()->json(['message' => 'Usuário não autenticado.'], 401);
+            }
+
+            return response()->json([
+                'message' => 'Dados do usuário logado.',
+                'user' => $user,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Erro ao recuperar os dados do usuário logado.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+
+    /**
      * Exibir um usuário específico.
      */
     public function show($id)

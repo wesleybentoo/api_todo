@@ -15,6 +15,7 @@ Route::post('/register', [UserController::class, 'store']); // Registro de usuá
 Route::middleware('auth:sanctum')->group(function () {
     // Usuários
     Route::apiResource('users', UserController::class); // CRUD padrão para usuários
+    Route::get('/profile', [UserController::class, 'profile']);
     Route::post('/logout', [UserController::class, 'logout']); // Logout
 
     // CATEGORIAS
